@@ -1,13 +1,7 @@
 package com.restapi.dataloader;
 
-import com.restapi.model.Amenity;
-import com.restapi.model.AppUser;
-import com.restapi.model.Category;
-import com.restapi.model.Role;
-import com.restapi.repository.AmenityRepository;
-import com.restapi.repository.CategoryRepository;
-import com.restapi.repository.RoleRepository;
-import com.restapi.repository.UserRepository;
+import com.restapi.model.*;
+import com.restapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -27,6 +21,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Autowired
     private AmenityRepository amenityRepository;
@@ -60,6 +57,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createCategoryIfNotFound("Premium", 1L);
         createCategoryIfNotFound("Gold", 2L);
         createCategoryIfNotFound("Silver", 3L);
+//        Create Room
+
         alreadySetup = true;
     }
 
@@ -131,4 +130,24 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         }
         return category;
     }
+
+//    @Transactional
+//    private Room createRoomIfNotFound(Long categoryId, String description, Double price, byte[] photo){
+//        Optional<Room> optionalRoom = roomRepository.findByPrice(price);
+//        Room room = null;
+//        if(optionalRoom.isEmpty()){
+//            room = new Room();
+//            room.setDescription(description);
+//            room.setPrice(price);
+//            room.setPhoto(photo);
+//
+//            Category category = new Category();
+//            category.setId(categoryId);
+//
+//            room.setCategory(category);
+//
+//            room = roomRepository.save(room);
+//        }
+//        return room;
+//    }
 }

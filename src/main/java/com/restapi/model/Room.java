@@ -31,7 +31,7 @@ public class Room {
 
     @Lob
     @Nullable
-    @Column(name = "photo", columnDefinition="BLOB")
+    @Column(name = "photo", columnDefinition = "BLOB")
     private byte[] photo;
 
     @JsonIgnore
@@ -40,7 +40,7 @@ public class Room {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orderList;
 
     @CreationTimestamp

@@ -2,6 +2,7 @@ package com.restapi.controller.staff;
 
 import com.restapi.model.AppUser;
 import com.restapi.model.Role;
+import com.restapi.response.UserResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class StaffUserController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     public ResponseEntity<APIResponse> getAllUsers() {
-        List<AppUser> appUsers = userService.findAll();
+        List<UserResponse> userResponses = userService.findAll();
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(appUsers);
+        apiResponse.setData(userResponses);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

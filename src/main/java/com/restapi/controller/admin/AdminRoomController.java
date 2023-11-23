@@ -5,6 +5,7 @@ import com.restapi.model.Room;
 import com.restapi.request.CategoryRequest;
 import com.restapi.request.RoomRequest;
 import com.restapi.response.CategoryResponse;
+import com.restapi.response.RoomResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,33 +29,33 @@ public class AdminRoomController {
 
     @GetMapping("/all")
     public ResponseEntity<APIResponse> getAllRooms() {
-        List<Room> roomList = roomService.findAll();
+        List<RoomResponse> roomResponseList = roomService.findAll();
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(roomList);
+        apiResponse.setData(roomResponseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<APIResponse> createRoom(@Valid @RequestBody RoomRequest roomRequest) {
-        List<Room> roomList = roomService.create(roomRequest);
+        List<RoomResponse> roomResponseList = roomService.create(roomRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(roomList);
+        apiResponse.setData(roomResponseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<APIResponse> updateRoom(@Valid @RequestBody RoomRequest roomRequest) {
-        List<Room> roomList = roomService.update(roomRequest);
+        List<RoomResponse> roomResponseList = roomService.update(roomRequest);
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(roomList);
+        apiResponse.setData(roomResponseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<APIResponse> deleteRoom(@PathVariable Long id) {
-        List<Room> roomList = roomService.deleteById(id);
+        List<RoomResponse> roomResponseList = roomService.deleteById(id);
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(roomList);
+        apiResponse.setData(roomResponseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 

@@ -7,11 +7,13 @@ import com.restapi.model.Room;
 import com.restapi.repository.CategoryRepository;
 import com.restapi.repository.RoomRepository;
 import com.restapi.request.RoomRequest;
+import com.restapi.response.RoomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RoomService {
@@ -22,12 +24,15 @@ public class RoomService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Room> findAll() {
-        return roomRepository.findAll();
+    public List<RoomResponse> findAll() {
+        List<Room> allRooms = roomRepository.findAll();
+        return allRooms.stream()
+                .map(roomDto::mapToGetRoom)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public List<Room> create(RoomRequest roomRequest) {
+    public List<RoomResponse> create(RoomRequest roomRequest) {
         Room room = roomDto.mapToRoom(roomRequest);
         Category category = categoryRepository.findById(roomRequest.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("CategoryId",
@@ -38,7 +43,7 @@ public class RoomService {
     }
 
     @Transactional
-    public List<Room> update(RoomRequest roomRequest) {
+    public List<RoomResponse> update(RoomRequest roomRequest) {
         Room room = roomDto.mapToRoom(roomRequest);
         Category category = categoryRepository.findById(roomRequest.getCategoryId())
                 .orElseThrow(() -> new ResourceNotFoundException("CategoryId",
@@ -48,8 +53,14 @@ public class RoomService {
         return findAll();
     }
 
-    public List<Room> deleteById(Long id) {
+    public List<RoomResponse> deleteById(Long id) {
         roomRepository.deleteById(id);
         return findAll();
+    }
+
+    public List<RoomResponse> getRoomByCategoryId(Long categoryId) {
+        List<Room> roomList = roomRepository.findByCategoryId(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("categoryId", "categoryId", categoryId));
+        return roomDto.mapToRoomResponse(roomList);
     }
 }

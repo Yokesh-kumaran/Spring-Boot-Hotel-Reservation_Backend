@@ -1,19 +1,23 @@
 package com.restapi.service;
 
 import com.restapi.dto.AuthDto;
+import com.restapi.dto.UserDto;
 import com.restapi.exception.common.InvalidUserException;
 import com.restapi.model.AppUser;
 import com.restapi.model.Role;
+import com.restapi.model.Room;
 import com.restapi.repository.RoleRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.LoginRequest;
 import com.restapi.request.RegisterRequest;
 import com.restapi.response.AuthResponse;
+import com.restapi.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -26,6 +30,8 @@ public class UserService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserDto userDto;
 
     public AuthResponse register(RegisterRequest registerRequest) {
         AppUser appUser = authDto.mapToAppUser(registerRequest);
@@ -47,7 +53,10 @@ public class UserService {
         return authDto.mapToAuthResponse(appUser);
     }
 
-    public List<AppUser> findAll() {
-        return userRepository.findAllUser();
+    public List<UserResponse> findAll() {
+        List<AppUser> allUsers = userRepository.findAllUser();
+        return allUsers.stream()
+                .map(userDto::mapToGetUser)
+                .collect(Collectors.toList());
     }
 }

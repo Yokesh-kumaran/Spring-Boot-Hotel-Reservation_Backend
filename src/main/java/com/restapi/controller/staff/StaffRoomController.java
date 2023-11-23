@@ -2,6 +2,7 @@ package com.restapi.controller.staff;
 
 import com.restapi.model.Role;
 import com.restapi.model.Room;
+import com.restapi.response.RoomResponse;
 import com.restapi.response.common.APIResponse;
 import com.restapi.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class StaffRoomController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_STAFF')")
     public ResponseEntity<APIResponse> getAllRooms() {
-        List<Room> roomList = roomService.findAll();
+        List<RoomResponse> roomResponseList = roomService.findAll();
         apiResponse.setStatus(HttpStatus.OK.value());
-        apiResponse.setData(roomList);
+        apiResponse.setData(roomResponseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

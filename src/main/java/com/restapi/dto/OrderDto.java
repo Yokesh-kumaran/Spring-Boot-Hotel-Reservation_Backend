@@ -23,6 +23,7 @@ public class OrderDto {
             orderResponse.setPrice(order.getRoom().getPrice());
             orderResponse.setCheckinDate(order.getCheckInDate());
             orderResponse.setCheckoutDate(order.getCheckOutDate());
+            orderResponse.setCategoryName(order.getRoom().getCategory().getName());
             orderResponseList.add(orderResponse);
         }
 
