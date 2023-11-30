@@ -10,6 +10,7 @@ import com.restapi.repository.RoomRepository;
 import com.restapi.repository.UserRepository;
 import com.restapi.request.OrderRequest;
 import com.restapi.response.OrderResponse;
+import com.restapi.response.RoomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +55,29 @@ public class OrderService {
         Order order = new Order();
         order.setAppUser(appUser);
         order.setRoom(room);
-        order.setCheckInDate(order.getCheckInDate());
-        order.setCheckOutDate(order.getCheckOutDate());
+        order.setFirstName(orderRequest.getFirstName());
+        order.setLastName(orderRequest.getLastName());
+        order.setGender(orderRequest.getGender());
+        order.setAddress1(orderRequest.getAddress1());
+        order.setAddress2(orderRequest.getAddress2());
+        order.setCity(orderRequest.getCity());
+        order.setState(orderRequest.getState());
+        order.setZipCode(orderRequest.getZipCode());
+        order.setPhoneNumber(orderRequest.getPhoneNumber());
+        order.setEmail(orderRequest.getEmail());
+        order.setCheckInDate(orderRequest.getCheckInDate());
+        order.setCheckOutDate(orderRequest.getCheckOutDate());
+        order.setCheckInTime(orderRequest.getCheckInTime());
+        order.setCheckOutTime(orderRequest.getCheckOutTime());
+        order.setAdults(orderRequest.getAdults());
+        order.setChildren(orderRequest.getChildren());
 
         order = orderRepository.save(order);
         return order;
+    }
+
+    public List<OrderResponse> deleteById(Long id) {
+        orderRepository.deleteById(id);
+        return getAllOrders();
     }
 }

@@ -29,10 +29,8 @@ public class Room {
     @Column(nullable = false, length = 200)
     private Double price;
 
-    @Lob
-    @Nullable
-    @Column(name = "photo", columnDefinition = "BLOB")
-    private byte[] photo;
+    @Column(name = "photo")
+    private String photo;
 
     @JsonIgnore
     @ManyToOne
@@ -40,7 +38,7 @@ public class Room {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Order> orderList;
 
     @CreationTimestamp

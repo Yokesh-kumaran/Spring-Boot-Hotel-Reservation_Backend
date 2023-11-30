@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AmenityRepository extends JpaRepository<Amenity, Long> {
+
     Optional<Amenity> findBybedCount(int bedCount);
 }

@@ -59,4 +59,9 @@ public class UserService {
                 .map(userDto::mapToGetUser)
                 .collect(Collectors.toList());
     }
+
+    public List<UserResponse> deleteById(Long id) {
+        userRepository.deleteById(id);
+        return findAll();
+    }
 }

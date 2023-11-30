@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/room")
-@RolesAllowed(Role.USER)
 public class RoomController {
     @Autowired
     private APIResponse apiResponse;
@@ -39,6 +39,14 @@ public class RoomController {
         List<RoomResponse> roomResponseList = roomService.getRoomByCategoryId(categoryId);
         apiResponse.setStatus(HttpStatus.OK.value());
         apiResponse.setData(roomResponseList);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/availableRooms/{start_date}/{end_date}")
+    public ResponseEntity<APIResponse> getAllAvailableRooms(@PathVariable String start_date,@PathVariable String end_date) throws ParseException {
+        List<RoomResponse> availableRoomList = roomService.findAllAvailableRooms(start_date,end_date);
+        apiResponse.setStatus(HttpStatus.OK.value());
+        apiResponse.setData(availableRoomList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

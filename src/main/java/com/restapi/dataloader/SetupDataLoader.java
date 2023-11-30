@@ -58,7 +58,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createCategoryIfNotFound("Gold", 2L);
         createCategoryIfNotFound("Silver", 3L);
 //        Create Room
-
         alreadySetup = true;
     }
 

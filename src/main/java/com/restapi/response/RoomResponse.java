@@ -16,7 +16,7 @@ public class RoomResponse {
     private String categoryName;
     private String description;
     private Double price;
-    private byte[] photo;
+    private String photo;
     private int bedCount;
     private boolean powerBackup;
     private boolean ac;

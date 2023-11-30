@@ -16,17 +16,18 @@ public class OrderDto {
         for (Order order : orderList) {
             OrderResponse orderResponse = new OrderResponse();
             orderResponse.setId(order.getId());
-            orderResponse.setUserId(order.getAppUser().getId());
-            orderResponse.setName(order.getAppUser().getName());
-            orderResponse.setUsername(order.getAppUser().getUsername());
             orderResponse.setRoomId(order.getRoom().getId());
-            orderResponse.setPrice(order.getRoom().getPrice());
-            orderResponse.setCheckinDate(order.getCheckInDate());
-            orderResponse.setCheckoutDate(order.getCheckOutDate());
-            orderResponse.setCategoryName(order.getRoom().getCategory().getName());
+            orderResponse.setFirstName(order.getFirstName());
+            orderResponse.setLastName(order.getLastName());
+            orderResponse.setCheckInDate(order.getCheckInDate());
+            orderResponse.setCheckOutDate(order.getCheckOutDate());
+            orderResponse.setPhoneNumber(order.getPhoneNumber());
+            orderResponse.setAdults(order.getAdults());
+            orderResponse.setChildren(order.getChildren());
+            orderResponse.setRoomPrice(order.getRoom().getPrice());
+            orderResponse.setCategoryId(order.getRoom().getCategory().getId());
             orderResponseList.add(orderResponse);
         }
-
         return orderResponseList;
     }
 }

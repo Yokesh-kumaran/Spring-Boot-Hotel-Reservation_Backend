@@ -19,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/category")
-@RolesAllowed(Role.USER)
 public class CategoryController {
     @Autowired
     private APIResponse apiResponse;

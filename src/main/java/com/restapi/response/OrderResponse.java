@@ -16,16 +16,18 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderResponse {
     private Long id;
-    private Long userId;
-    private String name;
-    private String username;
     private Long roomId;
-    private Double price;
+    private String firstName;
+    private String lastName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate checkinDate;
+    private LocalDate checkInDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate checkoutDate;
-    private String categoryName;
+    private LocalDate checkOutDate;
+    private Long phoneNumber;
+    private int adults;
+    private int children;
+    private Double roomPrice;
+    private Long categoryId;
 }

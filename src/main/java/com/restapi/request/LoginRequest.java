@@ -11,10 +11,10 @@ import javax.validation.constraints.Size;
 public class LoginRequest {
 
     @NotEmpty
-    @Size(min = 2, message = "Username should have at least 2 characters")
+    @Size(min = 2, message = "Username min length 2")
     private String username;
 
     @NotEmpty
-    @Size(min = 2, message = "Password should have at least 2 characters")
+    @Size(min = 2, message = "Password min length 2")
     private String password;
 }

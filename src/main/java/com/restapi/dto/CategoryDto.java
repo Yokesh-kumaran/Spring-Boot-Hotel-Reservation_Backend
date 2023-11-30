@@ -30,11 +30,9 @@ public class CategoryDto {
             category.setId(categoryRequest.getId());
         }
         category.setName(categoryRequest.getName());
-
-        Amenity amenity = new Amenity();
-        amenity.setId(categoryRequest.getAmenityId());
-
-        category.setAmenity(amenity);
+//        Amenity amenity = new Amenity();
+//        amenity.setId(categoryRequest.getAmenityId());
+//        category.setAmenity(amenity);
         return category;
     }
 }
